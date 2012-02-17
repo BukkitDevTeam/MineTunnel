@@ -1,7 +1,5 @@
 package com.md_5.minetunnel;
 
-import com.md_5.minetunnel.Player;
-import com.md_5.minetunnel.SessionState;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.ArrayDeque;
@@ -10,15 +8,13 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFutureListener;
-import org.spout.api.protocol.*;
+import org.spout.api.protocol.Message;
+import org.spout.api.protocol.MessageHandler;
+import org.spout.api.protocol.PlayerProtocol;
+import org.spout.api.protocol.Protocol;
 import org.spout.api.protocol.bootstrap.BootstrapProtocol;
 
-/**
- * A single connection to the server, which may or may not be associated with a
- * player.
- *
- */
-public final class Session  {
+public class Session {
 
     /**
      * The number of ticks which are elapsed before a client is disconnected due
@@ -58,11 +54,6 @@ public final class Session  {
      * The protocol for this session
      */
     private final AtomicReference<Protocol> protocol;
-    /**
-     * Stores the last block placement message to work around a bug in the
-     * vanilla client where duplicate packets are sent.
-     */
-    //private BlockPlacementMessage previousPlacement;
     private final BootstrapProtocol bootstrapProtocol;
 
     /**
@@ -118,7 +109,6 @@ public final class Session  {
         this.player = player;
     }
 
-    @SuppressWarnings("unchecked")
     public void pulse() {
         timeoutCounter++;
 
@@ -204,10 +194,6 @@ public final class Session  {
         messageQueue.add(message);
     }
 
-    /**
-     * Disposes of this session by destroying the associated player, if there is
-     * one.
-     */
     public void dispose(boolean broadcastQuit) {
         if (player != null) {
             // has left the game
@@ -217,7 +203,6 @@ public final class Session  {
     public String getSessionId() {
         return sessionId;
     }
-
 
     public void setProtocol(Protocol protocol) {
         if (!this.protocol.compareAndSet(bootstrapProtocol, protocol)) {

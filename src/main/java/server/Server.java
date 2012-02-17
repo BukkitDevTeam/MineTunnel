@@ -4,7 +4,6 @@ import java.net.InetSocketAddress;
 import minetunnel.MineTunnel;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
-import protocol.PipelineFactory;
 
 public class Server {
 
@@ -12,7 +11,7 @@ public class Server {
 
     public void start() throws Exception {
         server.setFactory(new NioServerSocketChannelFactory(MineTunnel.executor, MineTunnel.executor));
-        server.setPipelineFactory(new PipelineFactory());
+        server.setPipelineFactory(new ServerPipelineFactory());
         server.bind(new InetSocketAddress(MineTunnel.port));
     }
 }

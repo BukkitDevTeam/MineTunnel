@@ -11,7 +11,7 @@ import minetunnel.Player;
 import minetunnel.Session;
 import protocol.MessageHandler;
 
-public final class LoginMessageHandler extends MessageHandler<LoginMessage> {
+public class LoginMessageHandler extends MessageHandler<LoginMessage> {
 
     @Override
     public void handle(Session session, Player player, LoginMessage message) {

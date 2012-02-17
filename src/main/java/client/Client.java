@@ -1,18 +1,19 @@
 package client;
 
 import java.net.InetSocketAddress;
+import java.nio.channels.Channel;
 import minetunnel.MineTunnel;
 import org.jboss.netty.bootstrap.ClientBootstrap;
 import org.jboss.netty.channel.socket.nio.NioClientSocketChannelFactory;
-import protocol.PipelineFactory;
+import server.ServerPipelineFactory;
 
 public class Client {
 
     private final ClientBootstrap client = new ClientBootstrap();
 
-    public void start(String host, int port) throws Exception {
+    public Channel start(String host, int port) throws Exception {
         client.setFactory(new NioClientSocketChannelFactory(MineTunnel.executor, MineTunnel.executor));
-        client.setPipelineFactory(new PipelineFactory());
-        client.connect(new InetSocketAddress(host, port));
+        client.setPipelineFactory(new ServerPipelineFactory());
+        client.connect(new InetSocketAddress(host, port)).;
     }
 }

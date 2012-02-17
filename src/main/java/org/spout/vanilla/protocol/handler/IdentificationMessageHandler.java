@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import org.spout.api.protocol.MessageHandler;
-import org.spout.api.protocol.Session;
+import com.md_5.minetunnel.Session;
 import org.spout.vanilla.protocol.msg.IdentificationMessage;
 
 public final class IdentificationMessageHandler extends MessageHandler<IdentificationMessage> {

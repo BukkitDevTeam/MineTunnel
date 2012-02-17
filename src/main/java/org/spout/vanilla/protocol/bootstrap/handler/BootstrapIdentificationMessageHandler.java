@@ -2,7 +2,7 @@ package org.spout.vanilla.protocol.bootstrap.handler;
 
 import com.md_5.minetunnel.Player;
 import org.spout.api.protocol.MessageHandler;
-import org.spout.api.protocol.Session;
+import com.md_5.minetunnel.Session;
 import org.spout.vanilla.protocol.msg.IdentificationMessage;
 
 public class BootstrapIdentificationMessageHandler extends MessageHandler<IdentificationMessage> {

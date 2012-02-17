@@ -1,44 +1,35 @@
 package com.md_5.minetunnel;
 
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.jboss.netty.bootstrap.ServerBootstrap;
-import org.jboss.netty.channel.ChannelFactory;
-import org.jboss.netty.channel.ChannelPipelineFactory;
-import org.jboss.netty.channel.group.ChannelGroup;
-import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.spout.api.protocol.CommonPipelineFactory;
-import org.spout.api.protocol.bootstrap.BootstrapProtocol;
-import org.spout.server.net.SpoutSessionRegistry;
 
 public class MineTunnel {
 
-    public static int PROTOCOL_VERSION = 22;
+    // Config
+    public static int PROTOCOL_VERSION = 23;
+    public static int port = 25565;
     public static boolean offlineMode;
     public static String motd = "Proxy";
+    // Internals
+    private final ExecutorService executor = Executors.newCachedThreadPool();
     private final ServerBootstrap bootstrap = new ServerBootstrap();
-    private static SpoutSessionRegistry sessions = new SpoutSessionRegistry();
+    private static SessionRegistry sessions = new SessionRegistry();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         new MineTunnel().start();
     }
-    private final ChannelGroup group = new DefaultChannelGroup();
-    private final ConcurrentMap<SocketAddress, BootstrapProtocol> bootstrapProtocols = new ConcurrentHashMap<SocketAddress, BootstrapProtocol>();
-    private final ExecutorService executor = Executors.newCachedThreadPool();
 
-    public void start() {
-        ChannelFactory factory = new NioServerSocketChannelFactory(executor, executor);
-        bootstrap.setFactory(factory);
-        ChannelPipelineFactory pipelineFactory = new CommonPipelineFactory();
-        bootstrap.setPipelineFactory(pipelineFactory);
-        bootstrap.bind(new InetSocketAddress(25565));
+    public void start() throws Exception {
+        bootstrap.setFactory(new NioServerSocketChannelFactory(executor, executor));
+        bootstrap.setPipelineFactory(new CommonPipelineFactory());
+        bootstrap.bind(new InetSocketAddress(port));
         while (true) {
             sessions.pulse();
+            Thread.sleep(500);
         }
     }
 
@@ -47,10 +38,10 @@ public class MineTunnel {
     }
 
     public static String getMaxPlayers() {
-        return "?";
+        return "1";
     }
 
-    public static SpoutSessionRegistry getSessionRegistry() {
+    public static SessionRegistry getSessionRegistry() {
         return sessions;
     }
 }

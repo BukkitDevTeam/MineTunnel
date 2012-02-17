@@ -1,6 +1,7 @@
 package org.spout.api.protocol;
 
 import com.md_5.minetunnel.Player;
+import com.md_5.minetunnel.Session;
 
 public abstract class MessageHandler<T extends Message> {
 

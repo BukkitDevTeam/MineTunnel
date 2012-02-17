@@ -1,6 +1,7 @@
-package org.spout.server.net;
+package com.md_5.minetunnel;
 
 import com.md_5.minetunnel.Player;
+import com.md_5.minetunnel.SessionState;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.ArrayDeque;
@@ -17,7 +18,7 @@ import org.spout.api.protocol.bootstrap.BootstrapProtocol;
  * player.
  *
  */
-public final class SpoutSession implements Session {
+public final class Session  {
 
     /**
      * The number of ticks which are elapsed before a client is disconnected due
@@ -44,7 +45,7 @@ public final class SpoutSession implements Session {
     /**
      * The current state.
      */
-    private State state = State.EXCHANGE_HANDSHAKE;
+    private SessionState state = SessionState.EXCHANGE_HANDSHAKE;
     /**
      * The player associated with this session (if there is one).
      */
@@ -69,7 +70,7 @@ public final class SpoutSession implements Session {
      *
      * @param channel The channel associated with this session.
      */
-    public SpoutSession(Channel channel, BootstrapProtocol bootstrapProtocol) {
+    public Session(Channel channel, BootstrapProtocol bootstrapProtocol) {
         this.channel = channel;
         this.protocol = new AtomicReference<Protocol>(bootstrapProtocol);
         this.bootstrapProtocol = bootstrapProtocol;
@@ -80,7 +81,7 @@ public final class SpoutSession implements Session {
      *
      * @return The session's state.
      */
-    public State getState() {
+    public SessionState getState() {
         return state;
     }
 
@@ -89,7 +90,7 @@ public final class SpoutSession implements Session {
      *
      * @param state The new state.
      */
-    public void setState(State state) {
+    public void setState(SessionState state) {
         this.state = state;
     }
 
@@ -190,7 +191,7 @@ public final class SpoutSession implements Session {
 
     @Override
     public String toString() {
-        return SpoutSession.class.getName() + " [address=" + channel.getRemoteAddress() + "]";
+        return Session.class.getName() + " [address=" + channel.getRemoteAddress() + "]";
     }
 
     /**
@@ -217,7 +218,7 @@ public final class SpoutSession implements Session {
         return sessionId;
     }
 
-    @Override
+
     public void setProtocol(Protocol protocol) {
         if (!this.protocol.compareAndSet(bootstrapProtocol, protocol)) {
             throw new IllegalArgumentException("The protocol may only be set once per session");
@@ -226,7 +227,6 @@ public final class SpoutSession implements Session {
         }
     }
 
-    @Override
     public PlayerProtocol getPlayerProtocol() {
         Protocol protocol = this.protocol.get();
         return protocol == null ? null : protocol.getPlayerProtocol();

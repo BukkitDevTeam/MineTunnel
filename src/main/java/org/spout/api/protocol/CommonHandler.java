@@ -2,17 +2,20 @@ package org.spout.api.protocol;
 
 import com.md_5.minetunnel.MineTunnel;
 import org.jboss.netty.channel.*;
-import org.spout.server.net.SpoutSession;
+import com.md_5.minetunnel.Session;
 import org.spout.vanilla.protocol.bootstrap.VanillaBootstrapProtocol;
 
 public class CommonHandler extends SimpleChannelUpstreamHandler {
 
+    private Session s;
+
     @Override
     public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
         Channel c = e.getChannel();
-        Session session = new SpoutSession(c, new VanillaBootstrapProtocol());
+        Session session = new Session(c, new VanillaBootstrapProtocol());
         MineTunnel.getSessionRegistry().add(session);
         ctx.setAttachment(session);
+        s = session;
         System.out.println("Channel connected: " + c + ".");
     }
 
@@ -37,8 +40,8 @@ public class CommonHandler extends SimpleChannelUpstreamHandler {
     }
 
     public void setProtocol(Protocol protocol) {
-        if (session != null) {
-            session.setProtocol(protocol);
+        if (s != null) {
+            s.setProtocol(protocol);
         } else {
             throw new IllegalStateException("The protocol cannot be set before the channel is associated with a session");
         }

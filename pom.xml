@@ -17,14 +17,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.getspout</groupId>
-            <artifactId>spoutapi</artifactId>
-            <version>dev-SNAPSHOT</version>
-        </dependency>
-        <dependency>
             <groupId>org.spout</groupId>
             <artifactId>spoutnbt</artifactId>
             <version>dev-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.netty</groupId>
+            <artifactId>netty</artifactId>
+            <version>3.2.7.Final</version>
         </dependency>
     </dependencies>
 

@@ -29,3 +29,6 @@
 *.ipr
 *.iws
 .idea/
+
+# stuff
+src/main/resources/raw

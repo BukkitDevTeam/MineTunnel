@@ -4,8 +4,6 @@ import handler.*;
 import java.util.HashMap;
 import java.util.Map;
 import message.*;
-import org.spout.api.protocol.Message;
-import org.spout.api.protocol.MessageHandler;
 
 public class HandlerLookupService {
 

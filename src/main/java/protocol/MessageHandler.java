@@ -1,4 +1,4 @@
-package org.spout.api.protocol;
+package protocol;
 
 import minetunnel.Player;
 import minetunnel.Session;

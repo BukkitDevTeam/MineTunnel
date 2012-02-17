@@ -9,9 +9,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import message.KickMessage;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFutureListener;
-import org.spout.api.protocol.Message;
-import org.spout.api.protocol.MessageHandler;
-import org.spout.api.protocol.Protocol;
+import protocol.Message;
+import protocol.MessageHandler;
+import protocol.Protocol;
 import protocol.VanillaProtocol;
 
 public class Session {

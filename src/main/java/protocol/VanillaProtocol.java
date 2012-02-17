@@ -1,8 +1,6 @@
 package protocol;
 
 import message.LoginMessage;
-import org.spout.api.protocol.Message;
-import org.spout.api.protocol.Protocol;
 
 public class VanillaProtocol extends Protocol {
 

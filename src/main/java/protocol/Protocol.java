@@ -1,8 +1,6 @@
-package org.spout.api.protocol;
+package protocol;
 
 import java.util.concurrent.ConcurrentHashMap;
-import protocol.CodecLookupService;
-import protocol.HandlerLookupService;
 
 public class Protocol {
 
@@ -34,7 +32,6 @@ public class Protocol {
     public CodecLookupService getCodecLookupService() {
         return codecLookup;
     }
-
 
     /**
      * Gets the name of the Protocol

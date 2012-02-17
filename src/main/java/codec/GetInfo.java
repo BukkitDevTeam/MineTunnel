@@ -4,7 +4,7 @@ import java.io.IOException;
 import message.GetInfoMessage;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
-import org.spout.api.protocol.MessageCodec;
+import protocol.MessageCodec;
 
 public class GetInfo extends MessageCodec<GetInfoMessage> {
 

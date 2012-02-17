@@ -3,7 +3,7 @@ package codec;
 import message.LoginMessage;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
-import org.spout.api.protocol.MessageCodec;
+import protocol.MessageCodec;
 import protocol.ChannelBufferUtils;
 
 public final class Login extends MessageCodec<LoginMessage> {

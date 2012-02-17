@@ -4,7 +4,7 @@ import message.GetInfoMessage;
 import minetunnel.MineTunnel;
 import minetunnel.Player;
 import minetunnel.Session;
-import org.spout.api.protocol.MessageHandler;
+import protocol.MessageHandler;
 
 public class GetInfoHandler extends MessageHandler<GetInfoMessage> {
 

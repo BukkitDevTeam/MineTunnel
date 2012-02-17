@@ -4,7 +4,7 @@ import java.io.IOException;
 import message.RespawnMessage;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
-import org.spout.api.protocol.MessageCodec;
+import protocol.MessageCodec;
 import protocol.ChannelBufferUtils;
 
 public final class Respawn extends MessageCodec<RespawnMessage> {

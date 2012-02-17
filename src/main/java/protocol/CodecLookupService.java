@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import org.spout.api.protocol.Message;
-import org.spout.api.protocol.MessageCodec;
 
 /**
  * A class used to lookup message codecs.
@@ -15,7 +13,6 @@ public final class CodecLookupService {
 
     public CodecLookupService() {
         try {
-            bind(KeepAlive.class);
             bind(Login.class);
             bind(Handshake.class);
             bind(Respawn.class);

@@ -1,6 +1,6 @@
 package message;
 
-import org.spout.api.protocol.Message;
+import protocol.Message;
 
 public final class KickMessage extends Message {
 

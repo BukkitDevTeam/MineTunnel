@@ -2,7 +2,7 @@ package handler;
 
 import minetunnel.Player;
 import minetunnel.Session;
-import org.spout.api.protocol.MessageHandler;
+import protocol.MessageHandler;
 import message.RespawnMessage;
 
 public class RespawnMessageHandler extends MessageHandler<RespawnMessage> {

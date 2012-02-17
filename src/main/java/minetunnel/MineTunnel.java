@@ -1,5 +1,6 @@
 package minetunnel;
 
+import server.Server;
 import java.net.InetSocketAddress;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -8,7 +9,7 @@ import java.util.concurrent.Executors;
 import message.KickMessage;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
-import org.spout.api.protocol.PipelineFactory;
+import protocol.PipelineFactory;
 
 public class MineTunnel {
 
@@ -18,18 +19,12 @@ public class MineTunnel {
     public static boolean offlineMode;
     public static String motd = "Proxy";
     // Internals
-    private final ExecutorService executor = Executors.newCachedThreadPool();
-    private final ServerBootstrap bootstrap = new ServerBootstrap();
+    public static final ExecutorService executor = Executors.newCachedThreadPool();
+    private static final Server server = new Server();
     private static final ConcurrentMap<Session, Boolean> sessions = new ConcurrentHashMap<Session, Boolean>();
 
     public static void main(String[] args) throws Exception {
-        new MineTunnel().start();
-    }
-
-    public void start() throws Exception {
-        bootstrap.setFactory(new NioServerSocketChannelFactory(executor, executor));
-        bootstrap.setPipelineFactory(new PipelineFactory());
-        bootstrap.bind(new InetSocketAddress(port));
+        server.start();
     }
 
     public static String getOnlinePlayers() {

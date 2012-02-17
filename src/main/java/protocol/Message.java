@@ -1,4 +1,4 @@
-package org.spout.api.protocol;
+package protocol;
 
 public abstract class Message {
 

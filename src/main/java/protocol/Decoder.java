@@ -1,5 +1,6 @@
-package org.spout.api.protocol;
+package protocol;
 
+import server.ServerHandler;
 import java.io.IOException;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.Channel;
@@ -17,10 +18,10 @@ public class Decoder extends ReplayingDecoder<VoidEnum> {
     private volatile CodecLookupService codecLookup = null;
     private int previousOpcode = -1;
     private volatile VanillaProtocol bootstrapProtocol;
-    private final Handler handler;
+    private final ServerHandler handler;
     private final Encoder encoder;
 
-    public Decoder(Handler handler, Encoder encoder) {
+    public Decoder(ServerHandler handler, Encoder encoder) {
         this.encoder = encoder;
         this.handler = handler;
     }

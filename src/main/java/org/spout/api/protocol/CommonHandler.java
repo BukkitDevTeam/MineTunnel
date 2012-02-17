@@ -1,7 +1,7 @@
 package org.spout.api.protocol;
 
-import com.md_5.minetunnel.MineTunnel;
-import com.md_5.minetunnel.Session;
+import minetunnel.MineTunnel;
+import minetunnel.Session;
 import org.jboss.netty.channel.*;
 import org.spout.vanilla.protocol.bootstrap.VanillaBootstrapProtocol;
 

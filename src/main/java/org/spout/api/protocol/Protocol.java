@@ -7,13 +7,11 @@ public class Protocol {
     private static final ConcurrentHashMap<Long, Protocol> map = new ConcurrentHashMap<Long, Protocol>();
     private final CodecLookupService codecLookup;
     private final HandlerLookupService handlerLookup;
-    private final PlayerProtocol playerProtocol;
     private final String name;
 
-    public Protocol(String name, CodecLookupService codecLookup, HandlerLookupService handlerLookup, PlayerProtocol playerProtocol) {
+    public Protocol(String name, CodecLookupService codecLookup, HandlerLookupService handlerLookup) {
         this.codecLookup = codecLookup;
         this.handlerLookup = handlerLookup;
-        this.playerProtocol = playerProtocol;
         this.name = name;
     }
 
@@ -35,14 +33,6 @@ public class Protocol {
         return codecLookup;
     }
 
-    /**
-     * Gets the player protocol wrapper associated with this Protocol
-     *
-     * @return the player protocol wrapper
-     */
-    public PlayerProtocol getPlayerProtocol() {
-        return playerProtocol;
-    }
 
     /**
      * Gets the name of the Protocol

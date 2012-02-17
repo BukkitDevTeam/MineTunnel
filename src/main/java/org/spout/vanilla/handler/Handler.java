@@ -1,7 +1,7 @@
-package org.spout.vanilla.protocol.handler;
+package org.spout.vanilla.handler;
 
-import com.md_5.minetunnel.Player;
-import com.md_5.minetunnel.Session;
+import minetunnel.Player;
+import minetunnel.Session;
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.MessageHandler;
 

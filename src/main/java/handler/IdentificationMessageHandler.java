@@ -1,15 +1,15 @@
-package org.spout.vanilla.protocol.handler;
+package handler;
 
-import com.md_5.minetunnel.MineTunnel;
-import com.md_5.minetunnel.Player;
-import com.md_5.minetunnel.Session;
+import minetunnel.MineTunnel;
+import minetunnel.Player;
+import minetunnel.Session;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
 import org.spout.api.protocol.MessageHandler;
-import org.spout.vanilla.protocol.msg.IdentificationMessage;
+import message.IdentificationMessage;
 
 public final class IdentificationMessageHandler extends MessageHandler<IdentificationMessage> {
 

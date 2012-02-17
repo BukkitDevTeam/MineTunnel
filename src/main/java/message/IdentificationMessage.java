@@ -1,4 +1,4 @@
-package org.spout.vanilla.protocol.msg;
+package message;
 
 import org.spout.api.protocol.Message;
 

@@ -1,10 +1,10 @@
-package org.spout.vanilla.protocol.handler;
+package handler;
 
-import com.md_5.minetunnel.Player;
-import com.md_5.minetunnel.SessionState;
+import minetunnel.Player;
+import minetunnel.SessionState;
 import org.spout.api.protocol.MessageHandler;
-import com.md_5.minetunnel.Session;
-import org.spout.vanilla.protocol.msg.HandshakeMessage;
+import minetunnel.Session;
+import message.HandshakeMessage;
 
 public final class HandshakeMessageHandler extends MessageHandler<HandshakeMessage> {
 

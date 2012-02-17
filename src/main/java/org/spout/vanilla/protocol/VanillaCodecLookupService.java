@@ -1,7 +1,12 @@
 package org.spout.vanilla.protocol;
 
+import codec.ServerListPingCodec;
+import codec.KickCodec;
+import codec.RespawnCodec;
+import codec.IdentificationCodec;
+import codec.PingCodec;
+import codec.HandshakeCodec;
 import org.spout.api.protocol.CodecLookupService;
-import org.spout.vanilla.protocol.codec.*;
 
 public class VanillaCodecLookupService extends CodecLookupService {
 

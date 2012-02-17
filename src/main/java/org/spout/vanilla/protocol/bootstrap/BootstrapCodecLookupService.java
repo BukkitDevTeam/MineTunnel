@@ -1,10 +1,10 @@
 package org.spout.vanilla.protocol.bootstrap;
 
 import org.spout.api.protocol.CodecLookupService;
-import org.spout.vanilla.protocol.codec.HandshakeCodec;
-import org.spout.vanilla.protocol.codec.IdentificationCodec;
-import org.spout.vanilla.protocol.codec.KickCodec;
-import org.spout.vanilla.protocol.codec.ServerListPingCodec;
+import codec.HandshakeCodec;
+import codec.IdentificationCodec;
+import codec.KickCodec;
+import codec.ServerListPingCodec;
 
 public class BootstrapCodecLookupService extends CodecLookupService {
 

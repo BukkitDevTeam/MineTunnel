@@ -1,10 +1,10 @@
 package org.spout.vanilla.protocol;
 
+import handler.*;
+import message.*;
 import org.spout.api.protocol.HandlerLookupService;
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.MessageHandler;
-import org.spout.vanilla.protocol.handler.*;
-import org.spout.vanilla.protocol.msg.*;
 
 public class VanillaHandlerLookupService extends HandlerLookupService {
 
@@ -30,7 +30,6 @@ public class VanillaHandlerLookupService extends HandlerLookupService {
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public <T extends Message> MessageHandler<T> find(Class<T> clazz) {
         return (MessageHandler<T>) handlers.get(clazz);
     }

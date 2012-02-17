@@ -4,9 +4,9 @@ import org.spout.api.protocol.HandlerLookupService;
 import org.spout.vanilla.protocol.bootstrap.handler.BootstrapHandshakeMessageHandler;
 import org.spout.vanilla.protocol.bootstrap.handler.BootstrapIdentificationMessageHandler;
 import org.spout.vanilla.protocol.bootstrap.handler.BootstrapPingMessageHandler;
-import org.spout.vanilla.protocol.msg.HandshakeMessage;
-import org.spout.vanilla.protocol.msg.IdentificationMessage;
-import org.spout.vanilla.protocol.msg.ServerListPingMessage;
+import message.HandshakeMessage;
+import message.IdentificationMessage;
+import message.ServerListPingMessage;
 
 public class BootstrapHandlerLookupService extends HandlerLookupService {
 

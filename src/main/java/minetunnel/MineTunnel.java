@@ -1,4 +1,4 @@
-package com.md_5.minetunnel;
+package minetunnel;
 
 import java.net.InetSocketAddress;
 import java.util.concurrent.ExecutorService;

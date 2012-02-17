@@ -1,4 +1,4 @@
-package com.md_5.minetunnel;
+package minetunnel;
 
 public class Player {
 

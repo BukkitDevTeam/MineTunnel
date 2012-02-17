@@ -1,10 +1,10 @@
-package org.spout.vanilla.protocol.codec;
+package codec;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.spout.api.protocol.MessageCodec;
 import org.spout.vanilla.protocol.ChannelBufferUtils;
-import org.spout.vanilla.protocol.msg.HandshakeMessage;
+import message.HandshakeMessage;
 
 public final class HandshakeCodec extends MessageCodec<HandshakeMessage> {
 

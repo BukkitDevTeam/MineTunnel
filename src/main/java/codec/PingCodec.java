@@ -1,9 +1,9 @@
-package org.spout.vanilla.protocol.codec;
+package codec;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.spout.api.protocol.MessageCodec;
-import org.spout.vanilla.protocol.msg.PingMessage;
+import message.PingMessage;
 
 public final class PingCodec extends MessageCodec<PingMessage> {
 

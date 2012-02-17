@@ -1,4 +1,4 @@
-package com.md_5.minetunnel;
+package minetunnel;
 
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
@@ -6,20 +6,16 @@ import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
+import message.KickMessage;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelFutureListener;
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.MessageHandler;
-import org.spout.api.protocol.PlayerProtocol;
 import org.spout.api.protocol.Protocol;
 import org.spout.api.protocol.bootstrap.BootstrapProtocol;
 
 public class Session {
 
-    /**
-     * The number of ticks which are elapsed before a client is disconnected due
-     * to a timeout.
-     */
     private static final int TIMEOUT_TICKS = 20 * 60;
     /**
      * The Random for this session
@@ -60,6 +56,7 @@ public class Session {
      * Creates a new session.
      *
      * @param channel The channel associated with this session.
+     * @param bootstrapProtocol
      */
     public Session(Channel channel, BootstrapProtocol bootstrapProtocol) {
         this.channel = channel;
@@ -162,7 +159,7 @@ public class Session {
             System.out.println("Player {0} kicked: {1}");
             dispose(false);
         }
-        channel.write(protocol.get().getPlayerProtocol().getKickMessage(reason)).addListener(ChannelFutureListener.CLOSE);
+        channel.write(new KickMessage(reason)).addListener(ChannelFutureListener.CLOSE);
     }
 
     /**
@@ -192,6 +189,7 @@ public class Session {
      */
     public <T extends Message> void messageReceived(T message) {
         messageQueue.add(message);
+        pulse();
     }
 
     public void dispose(boolean broadcastQuit) {
@@ -210,10 +208,5 @@ public class Session {
         } else {
             System.out.println("Setting protocol to " + protocol.getName());
         }
-    }
-
-    public PlayerProtocol getPlayerProtocol() {
-        Protocol protocol = this.protocol.get();
-        return protocol == null ? null : protocol.getPlayerProtocol();
     }
 }

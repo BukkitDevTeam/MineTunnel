@@ -1,8 +1,9 @@
-package org.spout.vanilla.protocol.handler;
+package org.spout.vanilla.handler;
 
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.MessageHandler;
-import org.spout.vanilla.protocol.msg.IdentificationMessage;
+import handler.IdentificationMessageHandler;
+import message.IdentificationMessage;
 
 public final class HandlerLookupService extends org.spout.api.protocol.HandlerLookupService {
 

@@ -1,9 +1,9 @@
-package org.spout.vanilla.protocol.handler;
+package handler;
 
-import com.md_5.minetunnel.Player;
-import com.md_5.minetunnel.Session;
+import minetunnel.Player;
+import minetunnel.Session;
 import org.spout.api.protocol.MessageHandler;
-import org.spout.vanilla.protocol.msg.RespawnMessage;
+import message.RespawnMessage;
 
 public class RespawnMessageHandler extends MessageHandler<RespawnMessage> {
 

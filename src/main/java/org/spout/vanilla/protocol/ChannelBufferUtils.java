@@ -5,7 +5,6 @@ import org.jboss.netty.buffer.ChannelBuffer;
 /**
  * Contains several {@link org.jboss.netty.buffer.ChannelBuffer}-related utility
  * methods.
- *
  */
 public class ChannelBufferUtils {
 

@@ -1,8 +1,8 @@
 package org.spout.vanilla.protocol.handler;
 
 import com.md_5.minetunnel.Player;
-import org.spout.api.protocol.MessageHandler;
 import com.md_5.minetunnel.Session;
+import org.spout.api.protocol.MessageHandler;
 import org.spout.vanilla.protocol.msg.PingMessage;
 
 public class PingMessageHandler extends MessageHandler<PingMessage> {

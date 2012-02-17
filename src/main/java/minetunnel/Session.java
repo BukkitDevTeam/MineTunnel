@@ -25,19 +25,6 @@ public class Session {
      */
     private final Channel channel;
     /**
-     * A queue of incoming and unprocessed messages.
-     */
-    private final Queue<Message> messageQueue = new ArrayDeque<Message>();
-    /**
-     * A timeout counter. This is increment once every tick and if it goes above
-     * a certain value the session is disconnected.
-     */
-    private int timeoutCounter = 0;
-    /**
-     * The current state.
-     */
-    private SessionState state = SessionState.EXCHANGE_HANDSHAKE;
-    /**
      * The player associated with this session (if there is one).
      */
     private Player player;
@@ -61,24 +48,6 @@ public class Session {
         this.channel = channel;
         this.protocol = new AtomicReference<Protocol>(bootstrapProtocol);
         this.bootstrapProtocol = bootstrapProtocol;
-    }
-
-    /**
-     * Gets the state of this session.
-     *
-     * @return The session's state.
-     */
-    public SessionState getState() {
-        return state;
-    }
-
-    /**
-     * Sets the state of this session.
-     *
-     * @param state The new state.
-     */
-    public void setState(SessionState state) {
-        this.state = state;
     }
 
     /**

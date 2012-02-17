@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
-import message.IdentificationMessage;
+import message.LoginMessage;
 import minetunnel.MineTunnel;
 import minetunnel.Player;
 import minetunnel.Session;
 import org.spout.api.protocol.MessageHandler;
 
-public final class IdentificationMessageHandler extends MessageHandler<IdentificationMessage> {
+public final class LoginMessageHandler extends MessageHandler<LoginMessage> {
 
     @Override
-    public void handle(Session session, Player player, IdentificationMessage message) {
+    public void handle(Session session, Player player, LoginMessage message) {
         if (message.getId() < MineTunnel.PROTOCOL_VERSION) {
             session.disconnect("Outdated client!");
         } else if (message.getId() > MineTunnel.PROTOCOL_VERSION) {

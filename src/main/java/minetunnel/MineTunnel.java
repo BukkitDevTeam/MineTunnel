@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import message.KickMessage;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.spout.api.protocol.PipelineFactory;
@@ -37,6 +38,10 @@ public class MineTunnel {
 
     public static String getMaxPlayers() {
         return "1";
+    }
+
+    public static KickMessage getPingMessage() {
+        return new KickMessage(motd + "\u00A7" + getOnlinePlayers() + "\u00A7" + getMaxPlayers() + "\u00A7");
     }
 
     public static ConcurrentMap<Session, Boolean> getSessions() {

@@ -13,9 +13,4 @@ public final class HandshakeMessage extends Message {
     public String getIdentifier() {
         return identifier;
     }
-
-    @Override
-    public String toString() {
-        return "HandshakeMessage{identifier=" + identifier + "}";
-    }
 }

@@ -13,11 +13,11 @@ public class HandlerLookupService {
 
     static {
         try {
-            bind(IdentificationMessage.class, IdentificationMessageHandler.class);
+            bind(LoginMessage.class, LoginMessageHandler.class);
             bind(HandshakeMessage.class, HandshakeMessageHandler.class);
             bind(KickMessage.class, KickMessageHandler.class);
             bind(RespawnMessage.class, RespawnMessageHandler.class);
-            bind(ServerListPingMessage.class, PingMessageHandler.class);
+            bind(GetInfoMessage.class, GetInfoHandler.class);
         } catch (Exception ex) {
             throw new ExceptionInInitializerError(ex);
         }

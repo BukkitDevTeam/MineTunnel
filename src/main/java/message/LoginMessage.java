@@ -2,13 +2,13 @@ package message;
 
 import org.spout.api.protocol.Message;
 
-public final class IdentificationMessage extends Message {
+public final class LoginMessage extends Message {
 
     private final int id, dimension, mode, difficulty, worldHeight, maxPlayers;
     private final String name, worldType;
     private final long seed;
 
-    public IdentificationMessage(int id, String name, long seed, int mode, int dimension, int difficulty, int worldHeight, int maxPlayers, String worldType) {
+    public LoginMessage(int id, String name, long seed, int mode, int dimension, int difficulty, int worldHeight, int maxPlayers, String worldType) {
         this.id = id;
         this.name = name;
         this.seed = seed;

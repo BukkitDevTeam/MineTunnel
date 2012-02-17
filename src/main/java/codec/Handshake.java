@@ -1,15 +1,15 @@
 package codec;
 
+import message.HandshakeMessage;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.spout.api.protocol.MessageCodec;
 import protocol.ChannelBufferUtils;
-import message.HandshakeMessage;
 
-public final class HandshakeCodec extends MessageCodec<HandshakeMessage> {
+public final class Handshake extends MessageCodec<HandshakeMessage> {
 
-    public HandshakeCodec() {
-        super(HandshakeMessage.class, 0x02);
+    public Handshake() {
+        super(HandshakeMessage.class, 2);
     }
 
     @Override

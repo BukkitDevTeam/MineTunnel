@@ -1,19 +1,19 @@
 package codec;
 
+import message.LoginMessage;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.spout.api.protocol.MessageCodec;
 import protocol.ChannelBufferUtils;
-import message.IdentificationMessage;
 
-public final class IdentificationCodec extends MessageCodec<IdentificationMessage> {
+public final class Login extends MessageCodec<LoginMessage> {
 
-    public IdentificationCodec() {
-        super(IdentificationMessage.class, 0x01);
+    public Login() {
+        super(LoginMessage.class, 1);
     }
 
     @Override
-    public IdentificationMessage decode(ChannelBuffer buffer) {
+    public LoginMessage decode(ChannelBuffer buffer) {
         int version = buffer.readInt();
         String name = ChannelBufferUtils.readString(buffer);
         long seed = buffer.readLong();
@@ -23,11 +23,11 @@ public final class IdentificationCodec extends MessageCodec<IdentificationMessag
         int difficulty = buffer.readByte();
         int worldHeight = ChannelBufferUtils.getExpandedHeight(buffer.readByte());
         int maxPlayers = buffer.readByte();
-        return new IdentificationMessage(version, name, seed, mode, dimension, difficulty, worldHeight, maxPlayers, worldType);
+        return new LoginMessage(version, name, seed, mode, dimension, difficulty, worldHeight, maxPlayers, worldType);
     }
 
     @Override
-    public ChannelBuffer encode(IdentificationMessage message) {
+    public ChannelBuffer encode(LoginMessage message) {
         ChannelBuffer buffer = ChannelBuffers.dynamicBuffer();
         buffer.writeInt(message.getId());
         ChannelBufferUtils.writeString(buffer, message.getName());

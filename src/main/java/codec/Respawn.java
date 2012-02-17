@@ -1,16 +1,16 @@
 package codec;
 
 import java.io.IOException;
+import message.RespawnMessage;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.spout.api.protocol.MessageCodec;
 import protocol.ChannelBufferUtils;
-import message.RespawnMessage;
 
-public final class RespawnCodec extends MessageCodec<RespawnMessage> {
+public final class Respawn extends MessageCodec<RespawnMessage> {
 
-    public RespawnCodec() {
-        super(RespawnMessage.class, 0x09);
+    public Respawn() {
+        super(RespawnMessage.class, 9);
     }
 
     @Override

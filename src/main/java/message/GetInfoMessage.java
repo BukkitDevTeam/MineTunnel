@@ -2,7 +2,7 @@ package message;
 
 import org.spout.api.protocol.Message;
 
-public class ServerListPingMessage extends Message {
+public class GetInfoMessage extends Message {
 
     @Override
     public String toString() {

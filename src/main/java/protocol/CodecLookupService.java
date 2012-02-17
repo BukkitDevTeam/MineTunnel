@@ -15,12 +15,12 @@ public final class CodecLookupService {
 
     public CodecLookupService() {
         try {
-            bind(PingCodec.class);
-            bind(IdentificationCodec.class);
-            bind(HandshakeCodec.class);
-            bind(RespawnCodec.class);
-            bind(ServerListPingCodec.class);
-            bind(KickCodec.class);
+            bind(KeepAlive.class);
+            bind(Login.class);
+            bind(Handshake.class);
+            bind(Respawn.class);
+            bind(GetInfo.class);
+            bind(KickDisconnect.class);
         } catch (Exception ex) {
             throw new ExceptionInInitializerError(ex);
         }

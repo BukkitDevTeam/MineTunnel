@@ -1,15 +1,30 @@
-package org.spout.api.protocol;
+package protocol;
 
+import codec.*;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import org.spout.api.protocol.Message;
+import org.spout.api.protocol.MessageCodec;
 
 /**
  * A class used to lookup message codecs.
  */
-public abstract class CodecLookupService {
+public final class CodecLookupService {
 
+    public CodecLookupService() {
+        try {
+            bind(PingCodec.class);
+            bind(IdentificationCodec.class);
+            bind(HandshakeCodec.class);
+            bind(RespawnCodec.class);
+            bind(ServerListPingCodec.class);
+            bind(KickCodec.class);
+        } catch (Exception ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
     /**
      * A table which maps opcodes to codecs. This is generally used to map
      * incoming packets to a codec.

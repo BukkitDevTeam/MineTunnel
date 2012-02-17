@@ -12,7 +12,7 @@ import org.jboss.netty.channel.ChannelFutureListener;
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.MessageHandler;
 import org.spout.api.protocol.Protocol;
-import protocol.VanillaBootstrapProtocol;
+import protocol.VanillaProtocol;
 
 public class Session {
 
@@ -49,7 +49,7 @@ public class Session {
      * The protocol for this session
      */
     private final AtomicReference<Protocol> protocol;
-    private final VanillaBootstrapProtocol bootstrapProtocol;
+    private final VanillaProtocol bootstrapProtocol;
 
     /**
      * Creates a new session.
@@ -57,7 +57,7 @@ public class Session {
      * @param channel The channel associated with this session.
      * @param bootstrapProtocol
      */
-    public Session(Channel channel, VanillaBootstrapProtocol bootstrapProtocol) {
+    public Session(Channel channel, VanillaProtocol bootstrapProtocol) {
         this.channel = channel;
         this.protocol = new AtomicReference<Protocol>(bootstrapProtocol);
         this.bootstrapProtocol = bootstrapProtocol;

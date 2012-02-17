@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.jboss.netty.bootstrap.ServerBootstrap;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
-import org.spout.api.protocol.CommonPipelineFactory;
+import org.spout.api.protocol.PipelineFactory;
 
 public class MineTunnel {
 
@@ -27,7 +27,7 @@ public class MineTunnel {
 
     public void start() throws Exception {
         bootstrap.setFactory(new NioServerSocketChannelFactory(executor, executor));
-        bootstrap.setPipelineFactory(new CommonPipelineFactory());
+        bootstrap.setPipelineFactory(new PipelineFactory());
         bootstrap.bind(new InetSocketAddress(port));
     }
 

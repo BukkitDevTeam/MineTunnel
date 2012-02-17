@@ -1,7 +1,8 @@
 package org.spout.api.protocol;
 
 import java.util.concurrent.ConcurrentHashMap;
-import org.spout.vanilla.handler.HandlerLookupService;
+import protocol.CodecLookupService;
+import protocol.HandlerLookupService;
 
 public class Protocol {
 

@@ -4,10 +4,10 @@ import message.IdentificationMessage;
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.Protocol;
 
-public class VanillaBootstrapProtocol extends Protocol {
+public class VanillaProtocol extends Protocol {
 
-    public VanillaBootstrapProtocol() {
-        super("VanillaBootstrap", new VanillaCodecLookupService(), new VanillaHandlerLookupService());
+    public VanillaProtocol() {
+        super("VanillaBootstrap", new CodecLookupService(), new HandlerLookupService());
     }
 
     public long detectProtocolDefinition(Message message) {

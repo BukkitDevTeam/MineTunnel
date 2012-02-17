@@ -6,20 +6,21 @@ import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.handler.codec.replay.ReplayingDecoder;
 import org.jboss.netty.handler.codec.replay.VoidEnum;
-import protocol.VanillaBootstrapProtocol;
+import protocol.CodecLookupService;
+import protocol.VanillaProtocol;
 
 /**
  * A {@link ReplayingDecoder} which decodes {@link ChannelBuffer}s into Common {@link org.spout.api.protocol.Message}s.
  */
-public class CommonDecoder extends ReplayingDecoder<VoidEnum> {
+public class Decoder extends ReplayingDecoder<VoidEnum> {
 
     private volatile CodecLookupService codecLookup = null;
     private int previousOpcode = -1;
-    private volatile VanillaBootstrapProtocol bootstrapProtocol;
-    private final CommonHandler handler;
-    private final CommonEncoder encoder;
+    private volatile VanillaProtocol bootstrapProtocol;
+    private final Handler handler;
+    private final Encoder encoder;
 
-    public CommonDecoder(CommonHandler handler, CommonEncoder encoder) {
+    public Decoder(Handler handler, Encoder encoder) {
         this.encoder = encoder;
         this.handler = handler;
     }
@@ -28,7 +29,7 @@ public class CommonDecoder extends ReplayingDecoder<VoidEnum> {
     protected Object decode(ChannelHandlerContext ctx, Channel c, ChannelBuffer buf, VoidEnum state) throws Exception {
         if (codecLookup == null) {
             System.out.println("Setting codec lookup service");
-            bootstrapProtocol = new VanillaBootstrapProtocol();
+            bootstrapProtocol = new VanillaProtocol();
             System.out.println("Bootstrap protocol is: " + bootstrapProtocol);
             codecLookup = bootstrapProtocol.getCodecLookupService();
             System.out.println("Codec lookup service is: " + codecLookup);

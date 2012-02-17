@@ -1,11 +1,11 @@
-package org.spout.vanilla.handler;
+package protocol;
 
-import org.spout.api.protocol.Message;
-import org.spout.api.protocol.MessageHandler;
-import handler.IdentificationMessageHandler;
+import handler.*;
 import java.util.HashMap;
 import java.util.Map;
-import message.IdentificationMessage;
+import message.*;
+import org.spout.api.protocol.Message;
+import org.spout.api.protocol.MessageHandler;
 
 public class HandlerLookupService {
 
@@ -14,6 +14,10 @@ public class HandlerLookupService {
     static {
         try {
             bind(IdentificationMessage.class, IdentificationMessageHandler.class);
+            bind(HandshakeMessage.class, HandshakeMessageHandler.class);
+            bind(KickMessage.class, KickMessageHandler.class);
+            bind(RespawnMessage.class, RespawnMessageHandler.class);
+            bind(ServerListPingMessage.class, PingMessageHandler.class);
         } catch (Exception ex) {
             throw new ExceptionInInitializerError(ex);
         }

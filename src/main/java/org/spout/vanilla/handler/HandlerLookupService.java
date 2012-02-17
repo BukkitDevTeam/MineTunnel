@@ -3,13 +3,13 @@ package org.spout.vanilla.handler;
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.MessageHandler;
 import handler.IdentificationMessageHandler;
+import java.util.HashMap;
+import java.util.Map;
 import message.IdentificationMessage;
 
-public final class HandlerLookupService extends org.spout.api.protocol.HandlerLookupService {
+public class HandlerLookupService {
 
-    public HandlerLookupService() {
-        super();
-    }
+    protected static final Map<Class<? extends Message>, MessageHandler<?>> handlers = new HashMap<Class<? extends Message>, MessageHandler<?>>();
 
     static {
         try {
@@ -24,7 +24,6 @@ public final class HandlerLookupService extends org.spout.api.protocol.HandlerLo
         handlers.put(clazz, handler);
     }
 
-    @Override
     public <T extends Message> MessageHandler<T> find(Class<T> clazz) {
         return (MessageHandler<T>) handlers.get(clazz);
     }

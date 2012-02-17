@@ -3,7 +3,7 @@ package codec;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.buffer.ChannelBuffers;
 import org.spout.api.protocol.MessageCodec;
-import org.spout.vanilla.protocol.ChannelBufferUtils;
+import protocol.ChannelBufferUtils;
 import message.KickMessage;
 
 public final class KickCodec extends MessageCodec<KickMessage> {

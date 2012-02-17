@@ -1,6 +1,8 @@
 package minetunnel;
 
 import java.net.InetSocketAddress;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import org.jboss.netty.bootstrap.ServerBootstrap;
@@ -17,7 +19,7 @@ public class MineTunnel {
     // Internals
     private final ExecutorService executor = Executors.newCachedThreadPool();
     private final ServerBootstrap bootstrap = new ServerBootstrap();
-    private static SessionRegistry sessions = new SessionRegistry();
+    private static final ConcurrentMap<Session, Boolean> sessions = new ConcurrentHashMap<Session, Boolean>();
 
     public static void main(String[] args) throws Exception {
         new MineTunnel().start();
@@ -27,10 +29,6 @@ public class MineTunnel {
         bootstrap.setFactory(new NioServerSocketChannelFactory(executor, executor));
         bootstrap.setPipelineFactory(new CommonPipelineFactory());
         bootstrap.bind(new InetSocketAddress(port));
-        while (true) {
-            sessions.pulse();
-            Thread.sleep(500);
-        }
     }
 
     public static String getOnlinePlayers() {
@@ -41,7 +39,7 @@ public class MineTunnel {
         return "1";
     }
 
-    public static SessionRegistry getSessionRegistry() {
+    public static ConcurrentMap<Session, Boolean> getSessions() {
         return sessions;
     }
 }

@@ -1,10 +1,10 @@
-package org.spout.vanilla.protocol;
+package protocol;
 
 import handler.*;
 import message.*;
-import org.spout.api.protocol.HandlerLookupService;
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.MessageHandler;
+import org.spout.vanilla.handler.HandlerLookupService;
 
 public class VanillaHandlerLookupService extends HandlerLookupService {
 
@@ -17,8 +17,8 @@ public class VanillaHandlerLookupService extends HandlerLookupService {
             bind(IdentificationMessage.class, IdentificationMessageHandler.class);
             bind(HandshakeMessage.class, HandshakeMessageHandler.class);
             bind(KickMessage.class, KickMessageHandler.class);
-            bind(PingMessage.class, PingMessageHandler.class);
             bind(RespawnMessage.class, RespawnMessageHandler.class);
+            bind(ServerListPingMessage.class, PingMessageHandler.class);
         } catch (Exception ex) {
             throw new ExceptionInInitializerError(ex);
         }

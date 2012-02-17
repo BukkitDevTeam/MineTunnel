@@ -1,4 +1,4 @@
-package org.spout.vanilla.protocol;
+package protocol;
 
 import org.jboss.netty.buffer.ChannelBuffer;
 

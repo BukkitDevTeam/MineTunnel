@@ -1,4 +1,4 @@
-package org.spout.vanilla.protocol.bootstrap.handler;
+package protocol;
 
 import minetunnel.Player;
 import minetunnel.Session;

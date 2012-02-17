@@ -6,8 +6,7 @@ import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.handler.codec.replay.ReplayingDecoder;
 import org.jboss.netty.handler.codec.replay.VoidEnum;
-import org.spout.api.protocol.bootstrap.BootstrapProtocol;
-import org.spout.vanilla.protocol.bootstrap.VanillaBootstrapProtocol;
+import protocol.VanillaBootstrapProtocol;
 
 /**
  * A {@link ReplayingDecoder} which decodes {@link ChannelBuffer}s into Common {@link org.spout.api.protocol.Message}s.
@@ -16,7 +15,7 @@ public class CommonDecoder extends ReplayingDecoder<VoidEnum> {
 
     private volatile CodecLookupService codecLookup = null;
     private int previousOpcode = -1;
-    private volatile BootstrapProtocol bootstrapProtocol;
+    private volatile VanillaBootstrapProtocol bootstrapProtocol;
     private final CommonHandler handler;
     private final CommonEncoder encoder;
 

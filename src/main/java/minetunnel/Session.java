@@ -12,11 +12,10 @@ import org.jboss.netty.channel.ChannelFutureListener;
 import org.spout.api.protocol.Message;
 import org.spout.api.protocol.MessageHandler;
 import org.spout.api.protocol.Protocol;
-import org.spout.api.protocol.bootstrap.BootstrapProtocol;
+import protocol.VanillaBootstrapProtocol;
 
 public class Session {
 
-    private static final int TIMEOUT_TICKS = 20 * 60;
     /**
      * The Random for this session
      */
@@ -50,7 +49,7 @@ public class Session {
      * The protocol for this session
      */
     private final AtomicReference<Protocol> protocol;
-    private final BootstrapProtocol bootstrapProtocol;
+    private final VanillaBootstrapProtocol bootstrapProtocol;
 
     /**
      * Creates a new session.
@@ -58,7 +57,7 @@ public class Session {
      * @param channel The channel associated with this session.
      * @param bootstrapProtocol
      */
-    public Session(Channel channel, BootstrapProtocol bootstrapProtocol) {
+    public Session(Channel channel, VanillaBootstrapProtocol bootstrapProtocol) {
         this.channel = channel;
         this.protocol = new AtomicReference<Protocol>(bootstrapProtocol);
         this.bootstrapProtocol = bootstrapProtocol;
@@ -104,28 +103,6 @@ public class Session {
         }
 
         this.player = player;
-    }
-
-    public void pulse() {
-        timeoutCounter++;
-
-        Message message;
-        while ((message = messageQueue.poll()) != null) {
-            MessageHandler<Message> handler = (MessageHandler<Message>) this.protocol.get().getHandlerLookupService().find(message.getClass());
-            if (handler != null) {
-                try {
-                    handler.handle(this, player, message);
-                } catch (Exception e) {
-                    System.out.println("Message handler for " + message.getClass().getSimpleName() + " threw exception for player " + this.getPlayer().getName());
-                    e.printStackTrace();
-                    disconnect("Message handler exception for " + message.getClass().getSimpleName());
-                }
-            }
-            timeoutCounter = 0;
-        }
-        if (timeoutCounter >= TIMEOUT_TICKS) {
-            disconnect("Timed out", true);
-        }
     }
 
     /**
@@ -188,8 +165,16 @@ public class Session {
      * @param <T> The type of message.
      */
     public <T extends Message> void messageReceived(T message) {
-        messageQueue.add(message);
-        pulse();
+        MessageHandler<Message> handler = (MessageHandler<Message>) this.protocol.get().getHandlerLookupService().find(message.getClass());
+        if (handler != null) {
+            try {
+                handler.handle(this, player, message);
+            } catch (Exception e) {
+                System.out.println("Message handler for " + message.getClass().getSimpleName() + " threw exception for player " + this.getPlayer().getName());
+                e.printStackTrace();
+                disconnect("Message handler exception for " + message.getClass().getSimpleName());
+            }
+        }
     }
 
     public void dispose(boolean broadcastQuit) {

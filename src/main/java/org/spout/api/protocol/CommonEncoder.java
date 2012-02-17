@@ -6,7 +6,7 @@ import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.handler.codec.oneone.OneToOneEncoder;
-import org.spout.vanilla.protocol.bootstrap.VanillaBootstrapProtocol;
+import protocol.VanillaBootstrapProtocol;
 
 /**
  * A {@link OneToOneEncoder} which encodes Minecraft {@link Message}s into

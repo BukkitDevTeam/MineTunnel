@@ -1,16 +1,15 @@
-package org.spout.vanilla.protocol.bootstrap;
+package protocol;
 
-import org.spout.api.protocol.Message;
-import org.spout.api.protocol.bootstrap.BootstrapProtocol;
 import message.IdentificationMessage;
+import org.spout.api.protocol.Message;
+import org.spout.api.protocol.Protocol;
 
-public class VanillaBootstrapProtocol extends BootstrapProtocol {
+public class VanillaBootstrapProtocol extends Protocol {
 
     public VanillaBootstrapProtocol() {
-        super("VanillaBootstrap", new BootstrapCodecLookupService(), new BootstrapHandlerLookupService());
+        super("VanillaBootstrap", new VanillaCodecLookupService(), new VanillaHandlerLookupService());
     }
 
-    @Override
     public long detectProtocolDefinition(Message message) {
         System.out.println("Testing for protocol in message: " + message);
         if (message instanceof IdentificationMessage) {

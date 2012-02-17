@@ -3,7 +3,7 @@ package org.spout.api.protocol;
 import minetunnel.MineTunnel;
 import minetunnel.Session;
 import org.jboss.netty.channel.*;
-import org.spout.vanilla.protocol.bootstrap.VanillaBootstrapProtocol;
+import protocol.VanillaBootstrapProtocol;
 
 public class CommonHandler extends SimpleChannelUpstreamHandler {
 
@@ -13,7 +13,7 @@ public class CommonHandler extends SimpleChannelUpstreamHandler {
     public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
         Channel c = e.getChannel();
         Session session = new Session(c, new VanillaBootstrapProtocol());
-        MineTunnel.getSessionRegistry().add(session);
+        MineTunnel.getSessions().put(session, false);
         ctx.setAttachment(session);
         s = session;
         System.out.println("Channel connected: " + c + ".");
@@ -23,7 +23,7 @@ public class CommonHandler extends SimpleChannelUpstreamHandler {
     public void channelDisconnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
         Channel c = e.getChannel();
         Session session = (Session) ctx.getAttachment();
-        MineTunnel.getSessionRegistry().remove(session);
+        MineTunnel.getSessions().remove(session);
         session.dispose(true);
         System.out.println("Channel disconnected: " + c + ".");
     }

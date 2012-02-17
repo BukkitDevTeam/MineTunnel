@@ -11,11 +11,11 @@ public class CommonHandler extends SimpleChannelUpstreamHandler {
     @Override
     public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
         Channel c = e.getChannel();
-        Session session = new SpoutSession(c, new VanillaBootstrapProtocol());
+        Session s = new SpoutSession(c, new VanillaBootstrapProtocol());
 
         //server.getSessionRegistry().add(session);
-        ctx.setAttachment(session);
-        this.session = session;
+        ctx.setAttachment(s);
+        this.session = s;
 
         System.out.println("Channel connected: " + c + ".");
     }

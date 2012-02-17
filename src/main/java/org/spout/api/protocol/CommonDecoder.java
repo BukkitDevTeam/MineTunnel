@@ -32,18 +32,16 @@ public class CommonDecoder extends ReplayingDecoder<VoidEnum> {
             bootstrapProtocol = new VanillaBootstrapProtocol();
             System.out.println("Bootstrap protocol is: " + bootstrapProtocol);
             codecLookup = bootstrapProtocol.getCodecLookupService();
-            //System.out.println("Codec lookup service is: " + codecLookup);
-            System.out.println("qwerty");
+            System.out.println("Codec lookup service is: " + codecLookup);
         }
 
         int opcode;
 
-        //  try {
-        opcode = buf.getUnsignedShort(buf.readerIndex());
-        System.out.println("op" + opcode);
-        //} catch (Error e) {
-        //    opcode = buf.getUnsignedByte(buf.readerIndex()) << 8;
-        // }
+        try {
+            opcode = buf.getUnsignedShort(buf.readerIndex());
+        } catch (Error e) {
+            opcode = buf.getUnsignedByte(buf.readerIndex()) << 8;
+        }
 
         MessageCodec<?> codec = codecLookup.find(opcode);
         if (codec == null) {
@@ -61,7 +59,7 @@ public class CommonDecoder extends ReplayingDecoder<VoidEnum> {
         Message message = codec.decode(buf);
 
         if (bootstrapProtocol != null) {
-            //TODO: Why is this never printed??????
+
             System.out.println("Checking for protocol definition");
             long id = bootstrapProtocol.detectProtocolDefinition(message);
             if (id != -1L) {

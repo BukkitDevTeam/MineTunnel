@@ -171,7 +171,6 @@ public final class SpoutSession implements Session {
             System.out.println("Player {0} kicked: {1}");
             dispose(false);
         }
-
         channel.write(protocol.get().getPlayerProtocol().getKickMessage(reason)).addListener(ChannelFutureListener.CLOSE);
     }
 

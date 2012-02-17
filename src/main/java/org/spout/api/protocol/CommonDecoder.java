@@ -59,7 +59,6 @@ public class CommonDecoder extends ReplayingDecoder<VoidEnum> {
         Message message = codec.decode(buf);
 
         if (bootstrapProtocol != null) {
-
             System.out.println("Checking for protocol definition");
             long id = bootstrapProtocol.detectProtocolDefinition(message);
             if (id != -1L) {

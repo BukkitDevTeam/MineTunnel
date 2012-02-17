@@ -14,6 +14,7 @@ import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
 import org.spout.api.protocol.CommonPipelineFactory;
 import org.spout.api.protocol.bootstrap.BootstrapProtocol;
+import org.spout.server.net.SpoutSessionRegistry;
 
 public class MineTunnel {
 
@@ -21,6 +22,7 @@ public class MineTunnel {
     public static boolean offlineMode;
     public static String motd = "Proxy";
     private final ServerBootstrap bootstrap = new ServerBootstrap();
+    private static SpoutSessionRegistry sessions = new SpoutSessionRegistry();
 
     public static void main(String[] args) {
         new MineTunnel().start();
@@ -35,7 +37,9 @@ public class MineTunnel {
         ChannelPipelineFactory pipelineFactory = new CommonPipelineFactory();
         bootstrap.setPipelineFactory(pipelineFactory);
         bootstrap.bind(new InetSocketAddress(25565));
-
+        while (true) {
+            sessions.pulse();
+        }
     }
 
     public static String getOnlinePlayers() {
@@ -44,5 +48,9 @@ public class MineTunnel {
 
     public static String getMaxPlayers() {
         return "?";
+    }
+
+    public static SpoutSessionRegistry getSessionRegistry() {
+        return sessions;
     }
 }

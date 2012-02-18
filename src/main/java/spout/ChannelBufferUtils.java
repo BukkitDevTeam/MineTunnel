@@ -17,11 +17,6 @@ import org.spout.nbt.stream.NBTOutputStream;
 public final class ChannelBufferUtils {
 
     /**
-     * The UTF-8 character set.
-     */
-    private static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
-
-    /**
      * Writes a list of parameters (e.g. mob metadata) to the buffer.
      *
      * @param buf The buffer.
@@ -129,25 +124,6 @@ public final class ChannelBufferUtils {
     }
 
     /**
-     * Writes a UTF-8 string to the buffer.
-     *
-     * @param buf The buffer.
-     * @param str The string.
-     * @throws UnsupportedEncodingException if the encoding isn't supported.
-     * @throws IllegalArgumentException if the string is too long <em>after</em>
-     * it is encoded.
-     */
-    public static void writeUtf8String(ChannelBuffer buf, String str) throws UnsupportedEncodingException {
-        byte[] bytes = str.getBytes(CHARSET_UTF8.name());
-        if (bytes.length >= 65536) {
-            throw new IllegalArgumentException("Encoded UTF-8 string too long.");
-        }
-
-        buf.writeShort(bytes.length);
-        buf.writeBytes(bytes);
-    }
-
-    /**
      * Reads a string from the buffer.
      *
      * @param buf The buffer.
@@ -162,22 +138,6 @@ public final class ChannelBufferUtils {
         }
 
         return new String(characters);
-    }
-
-    /**
-     * Reads a UTF-8 encoded string from the buffer.
-     *
-     * @param buf The buffer.
-     * @return The string.
-     * @throws UnsupportedEncodingException if the encoding isn't supported.
-     */
-    public static String readUtf8String(ChannelBuffer buf) throws UnsupportedEncodingException {
-        int len = buf.readUnsignedShort();
-
-        byte[] bytes = new byte[len];
-        buf.readBytes(bytes);
-
-        return new String(bytes, CHARSET_UTF8.name());
     }
 
     public static Map<String, Tag> readCompound(ChannelBuffer buf) {
@@ -253,6 +213,7 @@ public final class ChannelBufferUtils {
     }
 
     public static boolean hasNbtData(int id) {
+        // TODO
         return true;
     }
 }

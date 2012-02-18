@@ -32,10 +32,10 @@ public class ServerHandler extends SimpleChannelUpstreamHandler {
     @Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
         Message message = (Message) e.getMessage();
-        //  if (HandlerLookupService.find(message.getClass()) != null) {
-        //     session.messageReceived(message);
-        //   } else {
-        session.sendServer(message);
-        //  }
+        if (HandlerLookupService.find(message.getClass()) != null) {
+            session.messageReceived(message);
+        } else {
+            session.sendServer(message);
+        }
     }
 }

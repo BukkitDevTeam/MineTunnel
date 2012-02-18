@@ -20,8 +20,6 @@ public class Session {
 
     public Session(Channel clientChannel) {
         this.clientChannel = clientChannel;
-        this.serverConnection = new Client(this);
-        serverConnection.start("127.0.0.1", 25566);
     }
 
     public void send(Object message) {
@@ -59,6 +57,10 @@ public class Session {
     }
 
     public void sendServer(Object message) {
+        if (serverConnection == null) {
+            serverConnection = new Client(this);
+            serverConnection.start("127.0.0.1", 25566);
+        }
         if (serverChannel != null && serverChannel.isOpen()) {
             serverChannel.write(message);
         } else {
@@ -73,7 +75,8 @@ public class Session {
             sendServer(message);
         }
     }
-    public void leaveServer(){
+
+    public void leaveServer() {
         clientChannel.disconnect();
     }
 }

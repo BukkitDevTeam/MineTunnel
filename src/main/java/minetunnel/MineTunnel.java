@@ -17,10 +17,10 @@ public class MineTunnel {
     // Internals
     public static final ExecutorService executor = Executors.newCachedThreadPool();
     private static final Server server = new Server();
-    private static final ConcurrentMap<Session, Boolean> sessions = new ConcurrentHashMap<Session, Boolean>();
+    private static final ConcurrentMap<String, Session> sessions = new ConcurrentHashMap<String, Session>();
 
     public static void main(String[] args) throws Exception {
-        server.start();
+        server.start("0.0.0.0", port);
     }
 
     public static String getOnlinePlayers() {
@@ -35,7 +35,11 @@ public class MineTunnel {
         return new KickMessage(motd + "\u00A7" + getOnlinePlayers() + "\u00A7" + getMaxPlayers() + "\u00A7");
     }
 
-    public static ConcurrentMap<Session, Boolean> getSessions() {
-        return sessions;
+    public static void addSession(Session session) {
+        sessions.put(session.getSessionId(), session);
+    }
+
+    public static void removeSession(Session session) {
+        sessions.remove(session.getSessionId());
     }
 }

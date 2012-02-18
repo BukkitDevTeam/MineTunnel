@@ -1,5 +1,6 @@
 package minetunnel;
 
+import client.Client;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 import java.util.Random;
@@ -13,11 +14,12 @@ import protocol.MessageHandler;
 public class Session {
 
     private final Channel clientChannel;
-    private Channel serverChannel;
+    private Client clientConnection;
     private final String sessionId = Long.toString(new Random().nextLong(), 16).trim();
 
-    public Session(Channel channel) {
-        this.clientChannel = channel;
+    public Session(Channel clientChannel, Client clientConnection) {
+        this.clientChannel = clientChannel;
+        this.clientConnection = clientConnection;
     }
 
     public void send(Message message) {
@@ -51,9 +53,5 @@ public class Session {
 
     public String getSessionId() {
         return sessionId;
-    }
-
-    public Channel getServerChannel() {
-        return serverChannel;
     }
 }

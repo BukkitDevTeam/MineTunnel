@@ -2,7 +2,7 @@ package minetunnel;
 
 import client.Client;
 import java.net.InetSocketAddress;
-import java.net.SocketAddress;
+import java.util.ArrayList;
 import java.util.Random;
 import message.KickMessage;
 import org.jboss.netty.channel.Channel;
@@ -13,13 +13,15 @@ import protocol.MessageHandler;
 
 public class Session {
 
-    private final Channel clientChannel;
-    private Client clientConnection;
+    private Channel clientChannel;
+    private Client serverConnection;
+    private Channel serverChannel;
     private final String sessionId = Long.toString(new Random().nextLong(), 16).trim();
 
-    public Session(Channel clientChannel, Client clientConnection) {
+    public Session(Channel clientChannel) {
         this.clientChannel = clientChannel;
-        this.clientConnection = clientConnection;
+        this.serverConnection = new Client(this);
+        serverConnection.start("127.0.01", 25566);
     }
 
     public void send(Message message) {
@@ -31,12 +33,7 @@ public class Session {
     }
 
     public InetSocketAddress getAddress() {
-        SocketAddress addr = clientChannel.getRemoteAddress();
-        if (addr instanceof InetSocketAddress) {
-            return (InetSocketAddress) addr;
-        } else {
-            return null;
-        }
+        return (InetSocketAddress) clientChannel.getRemoteAddress();
     }
 
     public <T extends Message> void messageReceived(T message) {
@@ -53,5 +50,25 @@ public class Session {
 
     public String getSessionId() {
         return sessionId;
+    }
+
+    public Client getClientConnection() {
+        return serverConnection;
+    }
+
+    public void sendServer(Message message) {
+        if (serverChannel != null) {
+            serverChannel.write(message);
+        } else {
+            queue.add(message);
+        }
+    }
+    private final ArrayList<Message> queue = new ArrayList<Message>();
+
+    public void connected(Channel channel) {
+        serverChannel = channel;
+        for (Message message : queue) {
+            sendServer(message);
+        }
     }
 }

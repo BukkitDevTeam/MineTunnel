@@ -1,6 +1,5 @@
 package server;
 
-import client.Client;
 import minetunnel.MineTunnel;
 import minetunnel.Session;
 import org.jboss.netty.channel.ChannelHandlerContext;
@@ -11,20 +10,22 @@ import protocol.Message;
 
 public class ServerHandler extends SimpleChannelUpstreamHandler {
 
+    private Session session;
+
     @Override
     public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
-        Session session = new Session(e.getChannel(), new Client());
+        session = new Session(e.getChannel());
         MineTunnel.addSession(session);
-        ctx.setAttachment(session);
     }
 
     @Override
     public void channelDisconnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
-        MineTunnel.removeSession((Session) ctx.getAttachment());
+        MineTunnel.removeSession(session);
     }
 
     @Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
-        ((Session) ctx.getAttachment()).messageReceived((Message) e.getMessage());
+        session.sendServer((Message) e.getMessage());
+        //session.messageReceived((Message) e.getMessage());
     }
 }

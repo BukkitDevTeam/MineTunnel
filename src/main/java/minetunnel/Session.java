@@ -21,7 +21,7 @@ public class Session {
     public Session(Channel clientChannel) {
         this.clientChannel = clientChannel;
         this.serverConnection = new Client(this);
-        serverConnection.start("127.0.01", 25566);
+        serverConnection.start("127.0.0.1", 25566);
     }
 
     public void send(Object message) {
@@ -72,5 +72,8 @@ public class Session {
         for (Object message : queue) {
             sendServer(message);
         }
+    }
+    public void leaveServer(){
+        clientChannel.disconnect();
     }
 }

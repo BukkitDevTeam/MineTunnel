@@ -3,7 +3,6 @@ package client;
 import java.net.ConnectException;
 import minetunnel.Session;
 import org.jboss.netty.channel.*;
-import protocol.Message;
 
 public class ClientHandler extends SimpleChannelUpstreamHandler {
 
@@ -11,10 +10,6 @@ public class ClientHandler extends SimpleChannelUpstreamHandler {
 
     public ClientHandler(Session session) {
         this.session = session;
-    }
-
-    @Override
-    public void channelConnected(ChannelHandlerContext ctx, ChannelStateEvent e) throws Exception {
     }
 
     @Override

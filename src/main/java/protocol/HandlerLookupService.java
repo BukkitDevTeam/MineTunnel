@@ -1,9 +1,9 @@
 package protocol;
 
-import handler.*;
+import handler.ServerListPingMessageHandler;
 import java.util.HashMap;
 import java.util.Map;
-import message.*;
+import message.ServerListPingMessage;
 
 public class HandlerLookupService {
 
@@ -11,10 +11,6 @@ public class HandlerLookupService {
 
     static {
         try {
-            bind(IdentificationMessage.class, IdentificationMessageHandler.class);
-            bind(HandshakeMessage.class, HandshakeMessageHandler.class);
-            bind(KickMessage.class, KickMessageHandler.class);
-            bind(RespawnMessage.class, RespawnMessageHandler.class);
             bind(ServerListPingMessage.class, ServerListPingMessageHandler.class);
         } catch (Exception ex) {
             ex.printStackTrace();

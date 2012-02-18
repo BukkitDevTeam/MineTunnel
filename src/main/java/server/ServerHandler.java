@@ -4,6 +4,7 @@ import message.ServerListPingMessage;
 import minetunnel.MineTunnel;
 import minetunnel.Session;
 import org.jboss.netty.channel.*;
+import protocol.HandlerLookupService;
 import protocol.Message;
 
 public class ServerHandler extends SimpleChannelUpstreamHandler {
@@ -18,6 +19,7 @@ public class ServerHandler extends SimpleChannelUpstreamHandler {
 
     @Override
     public void channelDisconnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
+        session.leaveServer();
         MineTunnel.removeSession(session);
     }
 
@@ -30,10 +32,10 @@ public class ServerHandler extends SimpleChannelUpstreamHandler {
     @Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
         Message message = (Message) e.getMessage();
-        if (message instanceof ServerListPingMessage) {
-            session.messageReceived(message);
-        } else {
-            session.sendServer(message);
-        }
+        //  if (HandlerLookupService.find(message.getClass()) != null) {
+        //     session.messageReceived(message);
+        //   } else {
+        session.sendServer(message);
+        //  }
     }
 }

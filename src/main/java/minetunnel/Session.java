@@ -25,7 +25,9 @@ public class Session {
     }
 
     public void send(Object message) {
-        clientChannel.write(message);
+        if (clientChannel != null && clientChannel.isOpen()) {
+            clientChannel.write(message);
+        }
     }
 
     public void disconnect(String reason) {
@@ -57,7 +59,7 @@ public class Session {
     }
 
     public void sendServer(Object message) {
-        if (serverChannel != null) {
+        if (serverChannel != null && serverChannel.isOpen()) {
             serverChannel.write(message);
         } else {
             queue.add(message);

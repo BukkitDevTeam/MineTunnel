@@ -1,5 +1,6 @@
 package server;
 
+import message.ServerListPingMessage;
 import minetunnel.MineTunnel;
 import minetunnel.Session;
 import org.jboss.netty.channel.*;
@@ -28,7 +29,11 @@ public class ServerHandler extends SimpleChannelUpstreamHandler {
 
     @Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
-        session.sendServer((Message) e.getMessage());
-        //session.messageReceived((Message) e.getMessage());
+        Message message = (Message) e.getMessage();
+        if (message instanceof ServerListPingMessage) {
+            session.messageReceived(message);
+        } else {
+            session.sendServer(message);
+        }
     }
 }

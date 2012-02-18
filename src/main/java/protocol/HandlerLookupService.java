@@ -1,15 +1,9 @@
 package protocol;
 
-import handler.HandshakeMessageHandler;
-import handler.IdentificationMessageHandler;
-import handler.KickMessageHandler;
-import handler.RespawnMessageHandler;
+import handler.*;
 import java.util.HashMap;
 import java.util.Map;
-import message.HandshakeMessage;
-import message.IdentificationMessage;
-import message.KickMessage;
-import message.RespawnMessage;
+import message.*;
 
 public class HandlerLookupService {
 
@@ -21,6 +15,7 @@ public class HandlerLookupService {
             bind(HandshakeMessage.class, HandshakeMessageHandler.class);
             bind(KickMessage.class, KickMessageHandler.class);
             bind(RespawnMessage.class, RespawnMessageHandler.class);
+            bind(ServerListPingMessage.class, ServerListPingMessageHandler.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

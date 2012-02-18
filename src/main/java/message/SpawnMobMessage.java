@@ -1,7 +1,7 @@
 package message;
 
 import java.util.List;
-import minetunnel.Parameter;
+import spout.Parameter;
 import protocol.Message;
 
 public final class SpawnMobMessage extends Message {

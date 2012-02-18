@@ -5,22 +5,22 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLEncoder;
-import message.LoginMessage;
+import message.IdentificationMessage;
 import minetunnel.MineTunnel;
 import minetunnel.Session;
 import protocol.MessageHandler;
 
-public class LoginMessageHandler extends MessageHandler<LoginMessage> {
+public final class IdentificationMessageHandler extends MessageHandler<IdentificationMessage> {
 
     @Override
-    public void handle(Session session, LoginMessage message) {
+    public void handle(Session session, IdentificationMessage message) {
         if (message.getId() < MineTunnel.PROTOCOL_VERSION) {
             session.disconnect("Outdated client!");
         } else if (message.getId() > MineTunnel.PROTOCOL_VERSION) {
             session.disconnect("Outdated server!");
         }
-        boolean allow = true; // Default to okay
-        // If we're in online mode, attempt to verify with mc.net
+        boolean allow = true;
+
         if (!MineTunnel.offlineMode) {
             allow = false;
             try {
@@ -28,13 +28,14 @@ public class LoginMessageHandler extends MessageHandler<LoginMessage> {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(verify.openStream()));
                 String result = reader.readLine();
                 reader.close();
-                allow = result.equals("YES"); // Get minecraft.net's result. If the result is YES, allow login to continue
+                allow = result.equals("YES");
             } catch (IOException ex) {
-                session.disconnect("Player identification failed [" + ex.getMessage() + "]");
+                ex.printStackTrace();
             }
         }
-        // Was the player allowed?
+
         if (allow) {
+        } else {
         }
     }
 }

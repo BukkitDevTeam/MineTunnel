@@ -1,9 +1,15 @@
 package protocol;
 
-import handler.*;
+import handler.HandshakeMessageHandler;
+import handler.IdentificationMessageHandler;
+import handler.KickMessageHandler;
+import handler.RespawnMessageHandler;
 import java.util.HashMap;
 import java.util.Map;
-import message.*;
+import message.HandshakeMessage;
+import message.IdentificationMessage;
+import message.KickMessage;
+import message.RespawnMessage;
 
 public class HandlerLookupService {
 
@@ -11,11 +17,10 @@ public class HandlerLookupService {
 
     static {
         try {
-            bind(LoginMessage.class, LoginMessageHandler.class);
+            bind(IdentificationMessage.class, IdentificationMessageHandler.class);
             bind(HandshakeMessage.class, HandshakeMessageHandler.class);
             bind(KickMessage.class, KickMessageHandler.class);
             bind(RespawnMessage.class, RespawnMessageHandler.class);
-            bind(GetInfoMessage.class, GetInfoHandler.class);
         } catch (Exception ex) {
             ex.printStackTrace();
         }

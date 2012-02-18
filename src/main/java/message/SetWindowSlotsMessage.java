@@ -1,7 +1,7 @@
 package message;
 
 import java.util.Arrays;
-import minetunnel.ItemStack;
+import spout.ItemStack;
 import protocol.Message;
 
 public final class SetWindowSlotsMessage extends Message {

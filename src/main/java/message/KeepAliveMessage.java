@@ -2,11 +2,11 @@ package message;
 
 import protocol.Message;
 
-public final class PingMessage extends Message {
+public final class KeepAliveMessage extends Message {
 
     private final int pingId;
 
-    public PingMessage(int pingId) {
+    public KeepAliveMessage(int pingId) {
         this.pingId = pingId;
     }
 

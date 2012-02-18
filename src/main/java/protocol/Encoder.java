@@ -6,23 +6,14 @@ import org.jboss.netty.buffer.ChannelBuffers;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.handler.codec.oneone.OneToOneEncoder;
-import protocol.CodecLookupService;
-import protocol.VanillaProtocol;
 
-/**
- * A {@link OneToOneEncoder} which encodes Minecraft {@link Message}s into
- * {@link ChannelBuffer}s.
- */
 public class Encoder extends OneToOneEncoder {
 
-    private volatile CodecLookupService codecLookup = null;
+    private volatile CodecLookupService codecLookup = new CodecLookupService();
 
     @Override
     protected Object encode(ChannelHandlerContext ctx, Channel c, Object msg) throws Exception {
         if (msg instanceof Message) {
-            if (codecLookup == null) {
-                codecLookup = new VanillaProtocol().getCodecLookupService();
-            }
             Message message = (Message) msg;
 
             Class<? extends Message> clazz = message.getClass();
@@ -43,9 +34,5 @@ public class Encoder extends OneToOneEncoder {
             return ChannelBuffers.wrappedBuffer(opcodeBuf, codec.encode(message));
         }
         return msg;
-    }
-
-    public void setProtocol(Protocol protocol) {
-        codecLookup = protocol.getCodecLookupService();
     }
 }

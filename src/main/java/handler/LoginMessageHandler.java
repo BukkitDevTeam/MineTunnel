@@ -7,14 +7,13 @@ import java.net.URL;
 import java.net.URLEncoder;
 import message.LoginMessage;
 import minetunnel.MineTunnel;
-import minetunnel.Player;
 import minetunnel.Session;
 import protocol.MessageHandler;
 
 public class LoginMessageHandler extends MessageHandler<LoginMessage> {
 
     @Override
-    public void handle(Session session, Player player, LoginMessage message) {
+    public void handle(Session session, LoginMessage message) {
         if (message.getId() < MineTunnel.PROTOCOL_VERSION) {
             session.disconnect("Outdated client!");
         } else if (message.getId() > MineTunnel.PROTOCOL_VERSION) {

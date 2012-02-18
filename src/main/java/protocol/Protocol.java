@@ -7,12 +7,10 @@ public class Protocol {
     private static final ConcurrentHashMap<Long, Protocol> map = new ConcurrentHashMap<Long, Protocol>();
     private final CodecLookupService codecLookup;
     private final HandlerLookupService handlerLookup;
-    private final String name;
 
-    public Protocol(String name, CodecLookupService codecLookup, HandlerLookupService handlerLookup) {
+    public Protocol(CodecLookupService codecLookup, HandlerLookupService handlerLookup) {
         this.codecLookup = codecLookup;
         this.handlerLookup = handlerLookup;
-        this.name = name;
     }
 
     /**
@@ -31,15 +29,6 @@ public class Protocol {
      */
     public CodecLookupService getCodecLookupService() {
         return codecLookup;
-    }
-
-    /**
-     * Gets the name of the Protocol
-     *
-     * @return the name
-     */
-    public String getName() {
-        return name;
     }
 
     /**

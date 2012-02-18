@@ -19,11 +19,11 @@ public abstract class MessageCodec<T extends Message> {
         this.expanded = expanded;
     }
 
-    public final Class<T> getType() {
+    public Class<T> getType() {
         return clazz;
     }
 
-    public final int getOpcode() {
+    public int getOpcode() {
         return opcode;
     }
 

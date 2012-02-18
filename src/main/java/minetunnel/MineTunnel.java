@@ -1,15 +1,11 @@
 package minetunnel;
 
-import server.Server;
-import java.net.InetSocketAddress;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import message.KickMessage;
-import org.jboss.netty.bootstrap.ServerBootstrap;
-import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
-import server.ServerPipelineFactory;
+import server.Server;
 
 public class MineTunnel {
 

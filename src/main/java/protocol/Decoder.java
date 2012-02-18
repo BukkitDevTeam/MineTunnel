@@ -9,20 +9,10 @@ import org.jboss.netty.handler.codec.replay.VoidEnum;
 
 public class Decoder extends ReplayingDecoder<VoidEnum> {
 
-    private volatile CodecLookupService codecLookup = null;
-    private int previousOpcode = -1;
-    private volatile VanillaProtocol bootstrapProtocol;
+    private volatile CodecLookupService codecLookup = new CodecLookupService();
 
     @Override
     protected Object decode(ChannelHandlerContext ctx, Channel c, ChannelBuffer buf, VoidEnum state) throws Exception {
-        if (codecLookup == null) {
-            System.out.println("Setting codec lookup service");
-            bootstrapProtocol = new VanillaProtocol();
-            System.out.println("Bootstrap protocol is: " + bootstrapProtocol);
-            codecLookup = bootstrapProtocol.getCodecLookupService();
-            System.out.println("Codec lookup service is: " + codecLookup);
-        }
-
         int opcode;
         try {
             opcode = buf.getUnsignedShort(buf.readerIndex());
@@ -32,7 +22,7 @@ public class Decoder extends ReplayingDecoder<VoidEnum> {
 
         MessageCodec<?> codec = codecLookup.find(opcode);
         if (codec == null) {
-            throw new IOException("Unknown operation code: " + opcode + " (previous opcode: " + previousOpcode + ").");
+            throw new IOException("Unknown operation code: " + opcode);
         }
 
         if (codec.isExpanded()) {
@@ -41,8 +31,6 @@ public class Decoder extends ReplayingDecoder<VoidEnum> {
             buf.readByte();
         }
 
-        Message message = codec.decode(buf);
-
-        return message;
+        return codec.decode(buf);
     }
 }

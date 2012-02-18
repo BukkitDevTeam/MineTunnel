@@ -2,10 +2,7 @@ package server;
 
 import minetunnel.MineTunnel;
 import minetunnel.Session;
-import org.jboss.netty.channel.ChannelHandlerContext;
-import org.jboss.netty.channel.ChannelStateEvent;
-import org.jboss.netty.channel.MessageEvent;
-import org.jboss.netty.channel.SimpleChannelUpstreamHandler;
+import org.jboss.netty.channel.*;
 import protocol.Message;
 
 public class ServerHandler extends SimpleChannelUpstreamHandler {
@@ -21,6 +18,12 @@ public class ServerHandler extends SimpleChannelUpstreamHandler {
     @Override
     public void channelDisconnected(ChannelHandlerContext ctx, ChannelStateEvent e) {
         MineTunnel.removeSession(session);
+    }
+
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) throws Exception {
+        Throwable t = e.getCause();
+        t.printStackTrace();
     }
 
     @Override

@@ -22,7 +22,8 @@ public class Decoder extends ReplayingDecoder<VoidEnum> {
 
         MessageCodec<?> codec = codecLookup.find(opcode);
         if (codec == null) {
-            throw new IOException("Unknown operation code: " + opcode);
+            return buf;
+            // throw new IOException("Unknown operation code: " + opcode);
         }
 
         if (codec.isExpanded()) {

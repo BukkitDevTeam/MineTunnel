@@ -26,11 +26,13 @@ public class ClientHandler extends SimpleChannelUpstreamHandler {
         Throwable t = e.getCause();
         if (t instanceof ConnectException) {
             System.out.println("Error: Could not connect!");
+        } else {
+            t.printStackTrace();
         }
     }
 
     @Override
     public void messageReceived(ChannelHandlerContext ctx, MessageEvent e) {
-        session.send((Message) e.getMessage());
+        session.send(e.getMessage());
     }
 }

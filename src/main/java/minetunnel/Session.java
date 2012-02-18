@@ -24,7 +24,7 @@ public class Session {
         serverConnection.start("127.0.01", 25566);
     }
 
-    public void send(Message message) {
+    public void send(Object message) {
         clientChannel.write(message);
     }
 
@@ -56,18 +56,18 @@ public class Session {
         return serverConnection;
     }
 
-    public void sendServer(Message message) {
+    public void sendServer(Object message) {
         if (serverChannel != null) {
             serverChannel.write(message);
         } else {
             queue.add(message);
         }
     }
-    private final ArrayList<Message> queue = new ArrayList<Message>();
+    private final ArrayList<Object> queue = new ArrayList<Object>();
 
     public void connected(Channel channel) {
         serverChannel = channel;
-        for (Message message : queue) {
+        for (Object message : queue) {
             sendServer(message);
         }
     }

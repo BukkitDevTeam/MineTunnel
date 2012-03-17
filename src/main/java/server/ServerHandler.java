@@ -1,6 +1,5 @@
 package server;
 
-import message.ServerListPingMessage;
 import minetunnel.MineTunnel;
 import minetunnel.Session;
 import org.jboss.netty.channel.*;

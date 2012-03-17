@@ -11,6 +11,7 @@ public class MineTunnel {
 
     // Config
     public static int PROTOCOL_VERSION = 23;
+    public static String bindHost = "0.0.0.0";
     public static int port = 25565;
     public static boolean offlineMode;
     public static String motd = "Proxy";
@@ -20,7 +21,7 @@ public class MineTunnel {
     private static final ConcurrentMap<String, Session> sessions = new ConcurrentHashMap<String, Session>();
 
     public static void main(String[] args) throws Exception {
-        server.start("0.0.0.0", port);
+        server.start(bindHost, port);
     }
 
     public static String getOnlinePlayers() {

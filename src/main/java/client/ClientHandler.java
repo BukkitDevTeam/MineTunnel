@@ -20,7 +20,7 @@ public class ClientHandler extends SimpleChannelUpstreamHandler {
     public void exceptionCaught(ChannelHandlerContext ctx, ExceptionEvent e) throws Exception {
         Throwable t = e.getCause();
         if (t instanceof ConnectException) {
-            System.out.println("Error: Could not connect!");
+            System.err.println("Error: Could not connect!");
         } else {
             t.printStackTrace();
         }

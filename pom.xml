@@ -29,11 +29,6 @@
             <artifactId>netty</artifactId>
             <version>3.2.7.Final</version>
         </dependency>
-        <dependency>
-            <groupId>org.spout</groupId>
-            <artifactId>spoutnbt</artifactId>
-            <version>dev-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <build>

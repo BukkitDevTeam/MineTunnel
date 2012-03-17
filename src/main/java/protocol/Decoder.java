@@ -1,5 +1,6 @@
 package protocol;
 
+import codec.PassthroughCodec;
 import java.io.IOException;
 import org.jboss.netty.buffer.ChannelBuffer;
 import org.jboss.netty.channel.Channel;
@@ -22,7 +23,7 @@ public class Decoder extends ReplayingDecoder<VoidEnum> {
 
         MessageCodec<?> codec = codecLookup.find(opcode);
         if (codec == null) {
-            return buf;
+            return new PassthroughCodec().decode(buf);
             // throw new IOException("Unknown operation code: " + opcode);
         }
 

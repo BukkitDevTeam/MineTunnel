@@ -9,6 +9,10 @@ public abstract class MessageCodec<T extends Message> {
     private final int opcode;
     private final boolean expanded;
 
+    public MessageCodec() {
+        this(null, 0);
+    }
+
     public MessageCodec(Class<T> clazz, int opcode) {
         this(clazz, opcode, false);
     }
